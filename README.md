@@ -1,28 +1,28 @@
-# 📺 Gemini ニコ生コメント返答ボット（疑似）
+# 📺 Gemini NicoNico Live Comment Response Bot (Simulated)
 
-このリポジトリでは、Google の Gemini API を活用して、ニコニコ生放送（ニコ生）のコメントに自動で返答するボットのサンプルを紹介します。
+This repository introduces a sample bot that uses Google's Gemini API to automatically respond to comments from NicoNico Live (NicoNama).
 
-> ⚠️ 現段階では **疑似的なコメント入力**に対して返答するテストバージョンです。リアルニコ生連携は未実装です。
-
----
-
-## ✅ 概要
-
-* ユーザーが手動でコメントを入力
-* Gemini API（Google Generative AI）を通じて応答を生成
-* あたかもニコ生の配信者のように振る舞います
+> ⚠️ Currently, this is a **simulated comment input** version for testing. Real-time integration with NicoNama is not yet implemented.
 
 ---
 
-## 🧰 必要なもの
+## ✅ Overview
 
-* Python 3.9 以上
-* Google AI Studio で発行した Gemini API キー
-* `google-generativeai` ライブラリ
+* Users manually input comments
+* Responses are generated using the Gemini API (Google Generative AI)
+* The bot behaves like a real NicoNama streamer
 
 ---
 
-## 📦 インストール
+## 🧰 Requirements
+
+* Python 3.9 or higher
+* Gemini API key issued from Google AI Studio
+* `google-generativeai` library
+
+---
+
+## 📦 Installation
 
 ```bash
 pip install google-generativeai
@@ -30,16 +30,16 @@ pip install google-generativeai
 
 ---
 
-## 🔑 APIキーの取得
+## 🔑 Getting the API Key
 
-1. Google にログイン
-2. [Google AI Studio](https://makersuite.google.com/) にアクセス
-3. "Get API Key" を選択し、API キーを取得
-4. 取得したキーを `.env` ファイルまたはスクリプト内に記載
+1. Log in to your Google account
+2. Visit [Google AI Studio](https://makersuite.google.com/)
+3. Select "Get API Key" to obtain your key
+4. Add the key to a `.env` file or directly in your script
 
 ---
 
-## 🚀 実行方法
+## 🚀 How to Run
 
 ```bash
 python gemini_nico_bot.py
@@ -47,38 +47,38 @@ python gemini_nico_bot.py
 
 ---
 
-## 📝 サンプルコード（`gemini_nico_bot.py`）
+## 📝 Sample Code (`gemini_nico_bot.py`)
 
 ```python
 import google.generativeai as genai
 import os
 
-# APIキーを設定（安全のため環境変数が推奨）
+# Set your API key (use environment variables for security)
 genai.configure(api_key="YOUR_API_KEY")
 model = genai.GenerativeModel('gemini-pro')
 
-print("🎥 ニコ生疑似コメントボット 起動！")
+print("🎥 Simulated NicoNama Comment Bot Started!")
 while True:
-    comment = input("👤 視聴者: ")
+    comment = input("👤 Viewer: ")
     if comment.lower() in ["q", "quit"]:
-        print("👋 終了します")
+        print("👋 Exiting")
         break
-    response = model.generate_content(f"ニコ生配信者として、以下のコメントに楽しく返答してください：{comment}")
-    print(f"🤖 ボット: {response.text}\n")
+    response = model.generate_content(f"As a NicoNama streamer, reply cheerfully to the following comment: {comment}")
+    print(f"🤖 Bot: {response.text}\n")
 ```
 
 ---
 
-## 🧪 拡張アイデア
+## 🧪 Expansion Ideas
 
-* 実際のニコ生 WebSocket コメントと連携
-* Selenium等によるコメント返信の自動投稿
-* キャラ別応答（例：毒舌系、癒し系、関西弁 など）
-* GPT互換対応ボットとの切替機能
+* Integrate with actual NicoNama WebSocket comments
+* Auto-reply posting via Selenium or other automation tools
+* Character-based responses (e.g., sassy, healing, Kansai dialect)
+* Switch between Gemini and GPT-based bots
 
 ---
 
-## 📚 参考
+## 📚 References
 
 * [Google AI Studio](https://makersuite.google.com/)
 * [google-generativeai GitHub](https://github.com/google/generative-ai-python)
@@ -87,8 +87,8 @@ while True:
 
 ## ❓ Q\&A
 
-**Q. Gemini API は無料ですか？**
-A. 2025年6月現在、一部無料枠がありますが利用量に応じて制限される可能性があります。
+**Q. Is the Gemini API free?**
+A. As of June 2025, a free tier exists but usage limits may apply depending on your activity.
 
-**Q. ニコ生の実コメント対応はできますか？**
-A. 可能ですが別途 WebSocket 連携などの実装が必要です。
+**Q. Can this bot work with real NicoNama comments?**
+A. Yes, but you need to implement WebSocket handling and NicoNama integration separately.
